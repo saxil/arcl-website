@@ -193,4 +193,85 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     `;
     document.head.appendChild(rippleStyle);
-});
+
+    // ========================================
+    // Animated Background Particles
+    // ========================================
+    const particlesContainer = document.getElementById('particles');
+    
+    if (particlesContainer) {
+        // Create floating particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Random position
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            
+            // Random animation delay and duration
+            const duration = 3 + Math.random() * 4;
+            const delay = Math.random() * 5;
+            particle.style.animation = `particleFade ${duration}s ease-in-out ${delay}s infinite`;
+            
+            // Random size
+            const size = 1 + Math.random() * 3;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            
+            particlesContainer.appendChild(particle);
+        }
+        
+        // Create multiple particles
+        for (let i = 0; i < 50; i++) {
+            createParticle();
+        }
+        
+        // Create code rain elements
+        const codeChars = ['0', '1', '{', '}', '<', '>', '/', '*', '+', '-', '=', '(', ')'];
+        
+        function createCodeRain() {
+            const codeRain = document.createElement('div');
+            codeRain.className = 'code-rain';
+            codeRain.textContent = codeChars.map(() => 
+                codeChars[Math.floor(Math.random() * codeChars.length)]
+            ).join('\n');
+            
+            codeRain.style.left = Math.random() * 100 + '%';
+            codeRain.style.animationDuration = (10 + Math.random() * 10) + 's';
+            codeRain.style.animationDelay = Math.random() * 10 + 's';
+            
+            particlesContainer.appendChild(codeRain);
+        }
+        
+        // Create sparse code rain
+        for (let i = 0; i < 8; i++) {
+            createCodeRain();
+        }
+    }
+
+    // ========================================
+    // Mouse Parallax Effect on Hero
+    // ========================================
+    const hero = document.querySelector('.hero');
+    const orbs = document.querySelectorAll('.orb');
+    
+    if (hero && orbs.length > 0) {
+        hero.addEventListener('mousemove', (e) => {
+            const rect = hero.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            
+            orbs.forEach((orb, index) => {
+                const speed = (index + 1) * 20;
+                orb.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+        
+        hero.addEventListener('mouseleave', () => {
+            orbs.forEach(orb => {
+                orb.style.transform = 'translate(0, 0)';
+                orb.style.transition = 'transform 0.5s ease-out';
+            });
+        });
+    }
