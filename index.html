@@ -1,0 +1,360 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="arcl - Transactional coding CLI that edits files via unified diffs. AI-assisted coding with explicit confirmations, automatic backups, and rollback on failure.">
+    <title>arcl | Transactional Coding CLI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <i class="fas fa-terminal"></i> arcl
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#usage">Usage</a></li>
+                <li><a href="#installation">Installation</a></li>
+                <li><a href="https://github.com/saxil/arcl-cli" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="fade-in">arcl</h1>
+                <p class="tagline fade-in">Transactional coding CLI that edits files via unified diffs</p>
+                <p class="description fade-in">A filesystem mutation engine for AI-assisted coding. Operates outside the IDE, proposes changes as explicit diffs, and never touches files without confirmation. <strong>Boring but trustworthy.</strong></p>
+                <div class="hero-buttons fade-in">
+                    <a href="#installation" class="btn btn-primary">
+                        <i class="fas fa-download"></i> Get Started
+                    </a>
+                    <a href="https://github.com/saxil/arcl-cli" class="btn btn-secondary" target="_blank">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                </div>
+            </div>
+            <div class="terminal-demo fade-in">
+                <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">Terminal</span>
+                </div>
+                <div class="terminal-body">
+                    <p><span class="prompt">$</span> <span class="command">arcl create project</span> <span class="arg">"a flask REST API with user authentication"</span></p>
+                    <p class="output">Detected template: python-flask</p>
+                    <p class="output">Planned structure:</p>
+                    <p class="output dim">  README.md, requirements.txt, src/main.py, src/routes/auth.py</p>
+                    <p class="output success">Created 6 files in flask-rest-api/</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Core Features</h2>
+            <p class="section-subtitle">Safe, transparent, and predictable file mutations</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <h3>Transactional Edits</h3>
+                    <p>Add, edit, or remove files atomically. All changes shown as unified diffs before applying.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-folder-tree"></i>
+                    </div>
+                    <h3>Template Scaffolding</h3>
+                    <p>Deterministic project creation from JSON templates. Flask, FastAPI, React, Express, and more.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Preview Mode</h3>
+                    <p>Use <code>--dry-run</code> to see exactly what would happen without applying any changes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rotate-left"></i>
+                    </div>
+                    <h3>Automatic Rollback</h3>
+                    <p>Every mutation creates a <code>.bak</code> file. Failed patches restore original content.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <h3>Edit Guardrails</h3>
+                    <p>Policy-based validation via <code>.arcl/config.json</code>. Block dangerous patterns like eval().</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Multi-Provider LLM</h3>
+                    <p>Gemini, OpenRouter, or local Ollama. Automatic failover when primary is unavailable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="usage" class="usage">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Simple commands, predictable results</p>
+            
+            <div class="usage-grid">
+                <div class="usage-card">
+                    <h3><i class="fas fa-plus"></i> Create Files</h3>
+                    <div class="code-block">
+                        <code>arcl add main.py "hello world script"</code>
+                    </div>
+                </div>
+                <div class="usage-card">
+                    <h3><i class="fas fa-pencil"></i> Edit Files</h3>
+                    <div class="code-block">
+                        <code>arcl edit main.py "add error handling"</code>
+                    </div>
+                </div>
+                <div class="usage-card">
+                    <h3><i class="fas fa-trash"></i> Remove Files</h3>
+                    <div class="code-block">
+                        <code>arcl remove src/routes/old_route.py</code>
+                    </div>
+                </div>
+                <div class="usage-card">
+                    <h3><i class="fas fa-magnifying-glass"></i> Ask Questions</h3>
+                    <div class="code-block">
+                        <code>arcl ask src/main.py "explain the main function"</code>
+                    </div>
+                </div>
+                <div class="usage-card">
+                    <h3><i class="fas fa-rocket"></i> Create Projects</h3>
+                    <div class="code-block">
+                        <code>arcl create project "a calculator app using tkinter"</code>
+                    </div>
+                </div>
+                <div class="usage-card">
+                    <h3><i class="fas fa-clock-rotate-left"></i> Explain Changes</h3>
+                    <div class="code-block">
+                        <code>arcl explain last</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="workflow-example">
+                <h3>Example Workflow</h3>
+                <div class="terminal-demo">
+                    <div class="terminal-header">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                        <span class="terminal-title">Terminal</span>
+                    </div>
+                    <div class="terminal-body">
+                        <p><span class="prompt">$</span> <span class="command">arcl create project</span> <span class="arg">"a flask REST API with user authentication"</span></p>
+                        <p class="output success">Created flask-rest-api/</p>
+                        <p><span class="prompt">$</span> <span class="command">cd</span> <span class="arg">C:\arcl-projects\flask-rest-api</span></p>
+                        <p><span class="prompt">$</span> <span class="command">arcl tree</span></p>
+                        <p class="output dim">flask-rest-api/</p>
+                        <p class="output dim">  src/main.py, src/routes/auth.py, requirements.txt</p>
+                        <p><span class="prompt">$</span> <span class="command">arcl add</span> <span class="arg">src/routes/products.py "CRUD endpoints for products"</span></p>
+                        <p class="output">Generating diff...</p>
+                        <p class="output success">Applied: +42 lines to src/routes/products.py</p>
+                        <p><span class="prompt">$</span> <span class="command">arcl edit</span> <span class="arg">src/main.py "add products router import"</span></p>
+                        <p class="output success">Applied: +2 -0 lines to src/main.py</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="templates">
+        <div class="container">
+            <h2 class="section-title">Built-in Templates</h2>
+            <p class="section-subtitle">Auto-detected from your description or explicitly selected</p>
+            <div class="templates-grid">
+                <div class="template-card">
+                    <i class="fab fa-python"></i>
+                    <span>python-flask</span>
+                </div>
+                <div class="template-card">
+                    <i class="fab fa-python"></i>
+                    <span>python-fastapi</span>
+                </div>
+                <div class="template-card">
+                    <i class="fab fa-python"></i>
+                    <span>python-tkinter</span>
+                </div>
+                <div class="template-card">
+                    <i class="fab fa-python"></i>
+                    <span>python-cli</span>
+                </div>
+                <div class="template-card">
+                    <i class="fab fa-node-js"></i>
+                    <span>node-express</span>
+                </div>
+                <div class="template-card">
+                    <i class="fab fa-node-js"></i>
+                    <span>node-cli</span>
+                </div>
+                <div class="template-card">
+                    <i class="fab fa-react"></i>
+                    <span>react-vite</span>
+                </div>
+                <div class="template-card">
+                    <i class="fas fa-globe"></i>
+                    <span>web-static</span>
+                </div>
+            </div>
+            <p class="template-hint">Use <code>arcl templates</code> to list all, or <code>--template name</code> to select explicitly</p>
+        </div>
+    </section>
+
+    <section id="installation" class="installation">
+        <div class="container">
+            <h2 class="section-title">Installation</h2>
+            <p class="section-subtitle">Clone, install, and link globally</p>
+            <div class="install-steps">
+                <div class="install-card">
+                    <h3><span class="step-number">1</span> Clone the repository</h3>
+                    <div class="code-block">
+                        <code>git clone https://github.com/saxil/arcl-cli.git</code>
+                        <button class="copy-btn" data-copy="git clone https://github.com/saxil/arcl-cli.git">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="install-card">
+                    <h3><span class="step-number">2</span> Install dependencies</h3>
+                    <div class="code-block">
+                        <code>cd arcl-cli && npm install</code>
+                        <button class="copy-btn" data-copy="cd arcl-cli && npm install">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="install-card">
+                    <h3><span class="step-number">3</span> Link globally</h3>
+                    <div class="code-block">
+                        <code>npm link</code>
+                        <button class="copy-btn" data-copy="npm link">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h3>Configuration</h3>
+                <p>Set one environment variable for your LLM provider:</p>
+                <div class="config-grid">
+                    <div class="config-card">
+                        <h4>Gemini (default)</h4>
+                        <div class="code-block">
+                            <code>$env:GEMINI_API_KEY = "your-key"</code>
+                        </div>
+                    </div>
+                    <div class="config-card">
+                        <h4>OpenRouter</h4>
+                        <div class="code-block">
+                            <code>$env:ARCL_PROVIDER = "openrouter"<br>$env:OPENROUTER_API_KEY = "your-key"</code>
+                        </div>
+                    </div>
+                    <div class="config-card">
+                        <h4>Local (Ollama)</h4>
+                        <div class="code-block">
+                            <code>$env:ARCL_PROVIDER = "local"<br>$env:ARCL_LOCAL_MODEL = "codellama"</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="principles">
+        <div class="container">
+            <h2 class="section-title">Core Principles</h2>
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-number">1</div>
+                    <h3>Runtime owns structure</h3>
+                    <p>LLM never creates directories or chooses paths</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">2</div>
+                    <h3>LLM is text-only</h3>
+                    <p>No tool calls, no command execution</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">3</div>
+                    <h3>All mutations explicit</h3>
+                    <p>User confirms every change</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">4</div>
+                    <h3>Fail closed</h3>
+                    <p>Invalid output = no changes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to try arcl?</h2>
+            <p>Transactional file edits with AI assistance. No surprises.</p>
+            <a href="https://github.com/saxil/arcl-cli" class="btn btn-primary btn-large" target="_blank">
+                <i class="fab fa-github"></i> Get Started on GitHub
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <i class="fas fa-terminal"></i> arcl
+                    </a>
+                    <p>Transactional coding CLI</p>
+                    <p class="footer-note">Boring but trustworthy.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#usage">Usage</a></li>
+                        <li><a href="#installation">Installation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://github.com/saxil/arcl-cli"><i class="fab fa-github"></i> GitHub</a></li>
+                        <li><a href="https://github.com/saxil/arcl-cli/issues"><i class="fas fa-bug"></i> Issues</a></li>
+                        <li><a href="https://github.com/saxil/arcl-cli#readme"><i class="fas fa-book"></i> Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>MIT License | Node.js >= 18.0.0</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
